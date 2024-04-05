@@ -8,7 +8,7 @@ import Modal from 'react-native-modal'
 
 export default function hotelDetails() {
   const params=useLocalSearchParams()
-  const router=useRouter
+  const router=useRouter()
   const cart=useSelector((state)=>state.cart.cart)
   // console.log(cart)
 
@@ -202,6 +202,7 @@ export default function hotelDetails() {
       ))
     }
     </ScrollView>
+{/* Bottom menu bar */}
     <View style={{ flexDirection: "row", backgroundColor: "white" }}>
       {menu?.map((item,index)=>(
         <Pressable key={index} style={{paddingHorizontal:7,borderRadius:4,paddingVertical:5,marginVertical:10,marginHorizontal:10,alignItems:'center',justifyContent:'center',borderColor:'#181818',borderWidth:1}} onPress={()=>{scrollToCategory(index);toggleOpenBox(item,!openBox.value)}}>
@@ -210,13 +211,16 @@ export default function hotelDetails() {
       ))}
     </View>
 
+
+
+{/* floating menu icon */}
     <Pressable style={{width:60,height:60,borderRadius:30,justifyContent:'center',alignItems:'center',position:"absolute",right:25,bottom:cart?.length>0?70:35,backgroundColor:'black'}}
     onPress={()=>setModalVisible(!modalVisible)}
     >
       <Ionicons style={{textAlign:'center'}} name='fast-food-outline' size={24} color='white'/>
       <Text style={{textAlign:'center',color:'white',fontWeight:'500',fontSize:11,marginTop:3}}>MENU</Text>
     </Pressable>
-
+{/* Menu modal opening from the floating menu icon */}
         <Modal isVisible={modalVisible} onBackdropPress={()=>setModalVisible(!modalVisible)}>
           <View style={{backgroundColor:'black',height:190,width:250,position:'absolute',bottom:35,right:10,borderRadius:7}}>
             {
@@ -237,8 +241,8 @@ export default function hotelDetails() {
             </View>
           </View>
         </Modal>
-
-    {cart?.length>0 && <Pressable style={{backgroundColor:"#fd5c63",paddingHorizontal:10,paddingVertical:10,justifyContent:'center',alignItems:'center'}}>
+{/* shows up when items present in cart and redirect to cart onpress */}
+    {cart?.length>0 && <Pressable style={{backgroundColor:"#fd5c63",paddingHorizontal:10,paddingVertical:10,justifyContent:'center',alignItems:'center'}} onPress={()=>router.push({pathname:'/cart',params:{name:params.name}})}>
       <Text style={{textAlign:'center',color:'white',fontSize:15,fontWeight:'600'}}>
          {cart.length} items added
       </Text>

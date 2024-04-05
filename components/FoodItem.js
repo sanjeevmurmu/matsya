@@ -14,7 +14,7 @@ export default function FoodItem({item,openBox,toggleOpenBox}) {
     <View>
         {data?.map((item,index)=>(
                 <>
-                <Pressable key={index} onPress={()=>handleMenu()} style={{margin:10,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                <Pressable key={index} onPress={handleMenu} style={{margin:10,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                 <Text>{item.name} {item?.items?.length}</Text>
                 <AntDesign name={`${isSubMenuOpen?'up':'down'}`}  size={20} color='black' style={{marginRight:10}}/>
                 </Pressable> 
